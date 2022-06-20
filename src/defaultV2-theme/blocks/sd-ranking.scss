@@ -5,7 +5,7 @@
 }
 
 .sd-element--with-frame .sv-ranking-item {
-  left: calcSize(-5);
+  inset-inline-start: calcSize(-5);
 }
 
 .sd-element--with-frame .sv-ranking-item__icon {
@@ -27,14 +27,15 @@
   }
 
   .sv-ranking-item {
-    left: 0;
+    inset-inline-start: 0;
   }
 }
 
 @mixin ranking_responsive {
   .sv-ranking-item {
-    left: calcSize(-3);
+    inset-inline-start: calcSize(-3);
   }
+
   .sv-ranking-item__icon-container {
     margin-left: 0;
     margin-right: 0;

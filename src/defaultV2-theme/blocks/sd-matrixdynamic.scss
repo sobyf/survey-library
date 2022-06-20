@@ -1,12 +1,14 @@
 .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
   position: sticky;
-  left: calcSize(-3);
+  inset-inline-start: calcSize(-3);
   margin-left: calcSize(-3);
   z-index: 12;
 }
+
 .sd-matrixdynamic__footer:first-child {
   padding-bottom: calcSize(2);
 }
+
 .sd-matrixdynamic__footer {
   padding-top: calcSize(1);
 }
@@ -14,6 +16,7 @@
 .sd-action.sd-matrixdynamic__remove-btn {
   opacity: 0.5;
 }
+
 .sd-matrixdynamic__btn {
   appearance: none;
   background: transparent;
@@ -24,11 +27,14 @@
   font-weight: 600;
   padding: calcSize(1) 0;
 }
+
 .sd-matrixdynamic__drag-element {
   padding: calcSize(2);
+
   &:hover {
     background-color: $background;
   }
+
   &:after {
     content: " ";
     display: block;
@@ -39,6 +45,7 @@
     border-radius: 10px;
   }
 }
+
 .sd-matrixdynamic__placeholder {
   .sd-matrixdynamic__add-btn {
     margin-left: 0;

@@ -96,7 +96,7 @@ div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
 
 .sd-element--complex.sd-element--with-frame>.sd-element__header--location-top:after {
   content: " ";
-  left: calc(-1 * var(--sd-base-padding));
+  inset-inline-start: calc(-1 * var(--sd-base-padding));
   width: calc(100% + 2 * var(--sd-base-padding));
 }
 
@@ -124,7 +124,7 @@ div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
       padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
 
       &:after {
-        left: calc(-1 * var(--sd-base-padding));
+        inset-inline-start: calc(-1 * var(--sd-base-padding));
         width: calc(100% + 2 * var(--sd-base-padding));
         bottom: calc(-0.5 * var(--sd-base-vertical-padding));
       }
@@ -238,7 +238,7 @@ div:not(:only-child)>.sd-element>.sd-question__header,
   height: calcSize(2);
   width: calcSize(2);
   position: absolute;
-  left: calcSize(-3);
+  inset-inline-start: calcSize(-3);
   top: calcSize(0.5);
 }
 

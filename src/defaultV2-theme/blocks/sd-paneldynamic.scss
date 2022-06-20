@@ -1,37 +1,45 @@
 .sd-paneldynamic {
     .sd-progress {
         position: absolute;
-        left: 0;
-        right: 0;
+        inset-inline-start: 0;
+        inset-inline-end: 0;
         height: 2px;
         z-index: 2;
         transform: translateY(-1px);
     }
-    & > .sd-panel {
+
+    &>.sd-panel {
         padding-top: 1px;
         padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
-        & + .sd-paneldynamic__remove-btn {
+
+        &+.sd-paneldynamic__remove-btn {
             margin-bottom: calc(0.5 * var(--sd-base-vertical-padding));
         }
     }
-    & .sd-paneldynamic__panel-wrapper > .sd-panel > .sd-panel__header {
+
+    & .sd-paneldynamic__panel-wrapper>.sd-panel>.sd-panel__header {
         padding-bottom: 0;
+
         &:after {
             display: none;
         }
+
         padding-top: calc(0.5 * var(--sd-base-vertical-padding) + #{$base-unit});
-        & > .sd-panel__title {
+
+        &>.sd-panel__title {
             color: $foreground-light;
         }
     }
-    & .sd-paneldynamic__panel-wrapper > .sd-panel {
-        & > .sd-panel__header ~ .sd-panel__content {
+
+    & .sd-paneldynamic__panel-wrapper>.sd-panel {
+        &>.sd-panel__header~.sd-panel__content {
             margin-top: calcSize(1);
         }
     }
 }
-.sd-question__content:first-child > .sd-paneldynamic {
-    & > .sd-paneldynamic__panel-wrapper > .sd-panel > .sd-panel__header {
+
+.sd-question__content:first-child>.sd-paneldynamic {
+    &>.sd-paneldynamic__panel-wrapper>.sd-panel>.sd-panel__header {
         padding-top: var(--sd-base-vertical-padding);
     }
 }
@@ -39,27 +47,31 @@
 .sd-paneldynamic__separator {
     display: block;
     position: absolute;
-    left: 0;
-    right: 0;
+    inset-inline-start: 0;
+    inset-inline-end: 0;
     margin: 0;
     border-color: $border-light;
     background: $border-light;
     height: 1px;
     border: none;
 }
+
 .sd-paneldynamic__panel-wrapper {
     padding-bottom: calc(0.5 * var(--sd-base-vertical-padding));
 }
+
 .sd-paneldynamic__panel-wrapper:after {
     display: table;
     clear: both;
     content: " ";
 }
+
 .sd-paneldynamic__panel-wrapper--in-row {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
+
 .sd-paneldynamic__btn {
     -webkit-appearance: none;
     appearance: none;
@@ -74,73 +86,89 @@
     cursor: pointer;
     border-radius: calcSize(12.5);
 }
+
 .sd-paneldynamic__remove-btn {
     float: right;
     margin-top: calc(0.5 * var(--sd-base-vertical-padding));
     margin-right: calcSize(-3);
 }
+
 .sd-paneldynamic__footer {
     clear: both;
+
     .sd-paneldynamic__prev-btn,
     .sd-paneldynamic__next-btn {
         display: block;
+
         svg {
             width: calcSize(2);
             height: calcSize(2);
         }
     }
+
     .sd-paneldynamic__add-btn,
     .sd-paneldynamic__progress-text,
     .sd-paneldynamic__progress--bottom {
         display: initial;
     }
 }
+
 .sd-paneldynamic__buttons-container {
     display: flex;
     align-items: center;
     padding: calc(var(--sd-base-vertical-padding) - #{$base-unit}) 0;
 }
+
 .sd-paneldynamic__progress-container {
     display: flex;
     align-items: center;
     margin-left: auto;
     margin-right: calcSize(-1);
 }
+
 .sd-paneldynamic__progress-text {
     color: $foreground-light;
     margin: 0;
     margin-right: calcSize(3);
 }
+
 .sd-paneldynamic__prev-btn,
 .sd-paneldynamic__next-btn {
     width: calcSize(2);
     height: calcSize(2);
+
     .sv-svg-icon {
         display: block;
     }
 }
+
 .sd-paneldynamic__prev-btn {
     margin-right: calcSize(2);
 }
+
 .sd-paneldynamic__next-btn {
     margin-left: calcSize(-1);
     margin-right: calcSize(2);
     transform: rotate(180deg);
 }
+
 .sd-paneldynamic__placeholder {
     .sd-paneldynamic__add-btn {
         display: initial;
         margin-left: 0;
     }
 }
+
 .sd-question--empty.sd-question--paneldynamic {
-    & > .sd-question__content {
+    &>.sd-question__content {
         padding-bottom: var(--sd-base-padding);
     }
 }
+
 .svc-question__content .sd-paneldynamic__panel-wrapper {
     padding: 0;
 }
+
 .sd-paneldynamic__buttons-container .sd-action-bar {
     width: 100%;
     margin: 0 calcSize(-3);
