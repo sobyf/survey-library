@@ -90,7 +90,7 @@
 .sd-paneldynamic__remove-btn {
     float: right;
     margin-top: calc(0.5 * var(--sd-base-vertical-padding));
-    margin-right: calcSize(-3);
+    margin-inline-end: calcSize(-3);
 }
 
 .sd-paneldynamic__footer {
@@ -122,14 +122,14 @@
 .sd-paneldynamic__progress-container {
     display: flex;
     align-items: center;
-    margin-left: auto;
-    margin-right: calcSize(-1);
+    margin-inline-start: auto;
+    margin-inline-end: calcSize(-1);
 }
 
 .sd-paneldynamic__progress-text {
     color: $foreground-light;
     margin: 0;
-    margin-right: calcSize(3);
+    margin-inline-end: calcSize(3);
 }
 
 .sd-paneldynamic__prev-btn,
@@ -143,19 +143,19 @@
 }
 
 .sd-paneldynamic__prev-btn {
-    margin-right: calcSize(2);
+    margin-inline-end: calcSize(2);
 }
 
 .sd-paneldynamic__next-btn {
-    margin-left: calcSize(-1);
-    margin-right: calcSize(2);
+    margin-inline-start: calcSize(-1);
+    margin-inline-end: calcSize(2);
     transform: rotate(180deg);
 }
 
 .sd-paneldynamic__placeholder {
     .sd-paneldynamic__add-btn {
         display: initial;
-        margin-left: 0;
+        margin-inline-start: 0;
     }
 }
 

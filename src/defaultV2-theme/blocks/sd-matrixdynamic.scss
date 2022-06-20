@@ -1,7 +1,7 @@
 .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
   position: sticky;
   inset-inline-start: calcSize(-3);
-  margin-left: calcSize(-3);
+  margin-inline-start: calcSize(-3);
   z-index: 12;
 }
 
@@ -48,7 +48,7 @@
 
 .sd-matrixdynamic__placeholder {
   .sd-matrixdynamic__add-btn {
-    margin-left: 0;
+    margin-inline-start: 0;
   }
 }
 

@@ -15,7 +15,7 @@
 
 @supports not (aspect-ratio: 1 / 1) {
   .sd-imagepicker>div {
-    margin-right: calcSize(2);
+    margin-inline-end: calcSize(2);
   }
 }
 

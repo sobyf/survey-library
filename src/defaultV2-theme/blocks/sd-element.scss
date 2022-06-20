@@ -1,6 +1,6 @@
 @mixin num_inline {
   float: none;
-  margin-left: 0;
+  margin-inline-start: 0;
   width: auto;
   padding-inline-start: 0;
   padding-inline-end: 0;
@@ -22,8 +22,8 @@ div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
   box-shadow: 0px 1px 2px $shadow-inner;
 
   &>.sd-question__erbox--outside-question {
-    margin-left: calc(-1 * var(--sd-base-padding));
-    margin-right: calc(-1 * var(--sd-base-padding));
+    margin-inline-start: calc(-1 * var(--sd-base-padding));
+    margin-inline-end: calc(-1 * var(--sd-base-padding));
     width: calc(100% + 2 * var(--sd-base-padding));
   }
 
@@ -76,7 +76,7 @@ div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
 }
 
 .sd-element--collapsed:not(.sd-element--with-frame)>.sd-element__header {
-  margin-left: calc(-1 * var(--sd-base-padding));
+  margin-inline-start: calc(-1 * var(--sd-base-padding));
   width: calc(100% + 2 * var(--sd-base-padding));
 }
 
@@ -216,7 +216,7 @@ div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
 div:not(:only-child)>.sd-element>.sd-question__header,
 .sd-element__title--expandable {
   .sd-action-bar {
-    margin-right: 0;
+    margin-inline-end: 0;
   }
 
   .sd-element__num {

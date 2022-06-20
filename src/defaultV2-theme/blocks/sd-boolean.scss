@@ -48,12 +48,12 @@
   transition-timing-function: linear;
   color: $primary;
   font-weight: 600;
-  margin-left: 0%;
+  margin-inline-start: 0%;
   transform: translateX(0);
 }
 
 .sd-boolean--checked .sd-boolean__thumb {
-  margin-left: 100%;
+  margin-inline-start: 100%;
   transform: translateX(-100%);
 }
 

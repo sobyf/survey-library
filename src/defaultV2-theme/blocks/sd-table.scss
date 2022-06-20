@@ -132,7 +132,7 @@
 
 .sd-table__cell--actions:not(.sd-table__cell--vertical):last-child {
   .sd-action-bar {
-    margin-right: calcSize(-3);
+    margin-inline-end: calcSize(-3);
     justify-content: flex-end;
     background: $background;
   }
@@ -183,9 +183,9 @@
 
   &:not(.sd-element--with-frame) {
     padding-inline-end: var(--sd-base-padding);
-    margin-right: calc(-1 * var(--sd-base-padding));
+    margin-inline-end: calc(-1 * var(--sd-base-padding));
     padding-inline-start: var(--sd-base-padding);
-    margin-left: calc(-1 * var(--sd-base-padding));
+    margin-inline-start: calc(-1 * var(--sd-base-padding));
     box-sizing: content-box;
   }
 }
@@ -211,7 +211,7 @@
     align-items: flex-start;
 
     .sd-matrix__responsive-title {
-      margin-left: calcSize(1);
+      margin-inline-start: calcSize(1);
       text-align: end;
     }
 
@@ -285,7 +285,7 @@
     width: auto;
 
     .sd-action-bar {
-      margin-right: calcSize(-3);
+      margin-inline-end: calcSize(-3);
       justify-content: flex-end;
       background: $background;
     }
@@ -329,6 +329,6 @@
   }
 
   .sd-matrixdynamic__btn.sd-matrixdynamic__add-btn {
-    margin-left: calcSize(-2);
+    margin-inline-start: calcSize(-2);
   }
 }

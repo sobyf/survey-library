@@ -23,7 +23,7 @@
 
 :not(.svc-row)>.sd-row--multiple {
   row-gap: calcSize(1);
-  margin-left: calcSize(-2);
+  margin-inline-start: calcSize(-2);
   width: calc(100% + 2 * #{$base-unit});
   flex-wrap: wrap;
 
@@ -35,7 +35,7 @@
 
 .sd-page:not(.svc-row)>.sd-row--multiple {
   padding: 0 var(--sd-base-padding) var(--sd-base-padding) calc(var(--sd-base-padding) - 2 * #{$base-unit});
-  margin-left: 0;
+  margin-inline-start: 0;
   width: 100%;
 }
 
