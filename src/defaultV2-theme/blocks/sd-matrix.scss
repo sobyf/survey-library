@@ -10,17 +10,14 @@
   display: flex;
   justify-content: center;
 }
-
 .sd-matrix__text {
   padding: calcSize(2);
 }
-
 .sd-matrix__text--checked {
   background-color: $primary-light;
   padding: calcSize(2);
 }
-
 .sd-matrix__cell:first-child {
   font-weight: 600;
-  text-align: end;
+  text-align: left;
 }
