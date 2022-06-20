@@ -12,4 +12,7 @@
   .sd-dropdown {
     background-position: left calcSize(1.5) top 50%, 0 0;
   }
+  .sd-element__title--expandable.sd-element__title--collapsed:before {
+    transform: rotate(180deg);
+  }
 }
