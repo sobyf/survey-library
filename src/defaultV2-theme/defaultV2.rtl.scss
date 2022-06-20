@@ -1,0 +1,12 @@
+[dir="rtl"] .sd-root-modern, [style*="direction:rtl"] .sd-root-modern {
+  .sd-paneldynamic__remove-btn {
+    float: left;
+  }
+  .sd-element__num {
+    float: right;
+
+    &+span {
+      float: right;
+    }
+  }
+}

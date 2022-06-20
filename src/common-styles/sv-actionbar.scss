@@ -199,7 +199,7 @@ button.sv-action-bar-item {
 }
 
 .sv-action--space {
-  margin-left: auto;
+  margin-inline-start: auto;
 }
 .sv-action-bar-item--pressed {
   background-color: $background-dim;
