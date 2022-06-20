@@ -2,7 +2,7 @@
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  padding-right: calcSize(6);
+  padding-inline-end: calcSize(6);
   background-position: right calcSize(1.5) top 50%, 0 0;
   background-repeat: no-repeat;
   background-size: calcSize(3) calcSize(3);
@@ -11,30 +11,37 @@
   display: flex;
   justify-content: space-between;
 }
+
 .sd-dropdown--empty:not(.sd-input--disabled),
 .sd-dropdown--empty:not(.sd-input--disabled) .sd-dropdown__value {
   color: $foreground-light;
 }
+
 .sd-dropdown option {
   color: $foreground;
   font-family: $font-family;
   font-size: calcSize(2);
 }
+
 .sd-dropdown__value {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
+
 .sd-dropdown_clean-button {
   padding: 0 calcSize(1);
 }
+
 .sd-dropdown_clean-button-svg {
   width: calcSize(3);
   height: calcSize(3);
 }
+
 .sd-dropdown use {
   fill: $foreground-light;
 }
+
 .sd-dropdown__value {
   font-family: $font-family;
   font-size: calcSize(2);

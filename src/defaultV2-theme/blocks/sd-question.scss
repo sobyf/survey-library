@@ -62,7 +62,7 @@
 
 .sd-question__content--left {
   display: inline-block;
-  padding-left: calcSize(3);
+  padding-inline-start: calcSize(3);
   flex: 1;
 }
 
@@ -99,8 +99,8 @@
 .sd-question__erbox--location--bottom {
   display: block;
   color: $red;
-  padding-left: 0;
-  padding-right: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
   text-align: end;
 }
 

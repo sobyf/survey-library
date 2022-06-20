@@ -35,7 +35,7 @@
       display: block;
 
       &:not(:last-child) {
-        padding-right: 0;
+        padding-inline-end: 0;
         padding-bottom: calcSize(2);
       }
     }
@@ -48,7 +48,7 @@
       font-size: 12px;
       line-height: 16px;
       height: 16px;
-      padding-right: 0;
+      padding-inline-end: 0;
       border-right: none;
       margin-bottom: 0;
       margin-top: calcSize(1);
@@ -61,8 +61,8 @@
     }
 
     .sd-multipletext__item .sd-input {
-      padding-right: 0;
-      padding-left: 0;
+      padding-inline-end: 0;
+      padding-inline-start: 0;
       margin-top: 0;
       margin-bottom: calcSize(1);
     }
@@ -72,7 +72,7 @@
       flex-direction: column;
 
       .sd-selectbase__column:not(:last-child) {
-        padding-right: 0;
+        padding-inline-end: 0;
       }
     }
 

@@ -14,6 +14,7 @@
   position: relative;
   gap: calcSize(1);
 }
+
 .sd-selectbase__column {
   vertical-align: top;
 }
@@ -24,22 +25,26 @@
   word-break: break-word;
   flex: 1 1 0px;
 }
+
 .sd-selectbase__column:not(:last-child) {
-  padding-right: calcSize(2);
+  padding-inline-end: calcSize(2);
 }
 
 // Copied from stylesmanager
 .sd-selectbase__column.sv-q-column-1 {
   width: 100%;
 }
+
 .sd-selectbase__other {
   margin-top: calcSize(2);
 }
+
 .sd-selectbase__item {
   .sd-selectbase__other {
     margin-top: calcSize(3.5);
   }
 }
+
 .sd-selectbase__item:last-child {
   .sd-selectbase__other {
     margin-bottom: calcSize(-2);

@@ -2,8 +2,8 @@
   float: none;
   margin-left: 0;
   width: auto;
-  padding-left: 0;
-  padding-right: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
 
   &+span {
     float: none;
@@ -15,8 +15,8 @@
 div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
   border-radius: calcSize(0.5);
   box-sizing: border-box;
-  padding-left: var(--sd-base-padding);
-  padding-right: var(--sd-base-padding);
+  padding-inline-start: var(--sd-base-padding);
+  padding-inline-end: var(--sd-base-padding);
   padding-bottom: var(--sd-base-padding);
   background: $background;
   box-shadow: 0px 1px 2px $shadow-inner;
@@ -115,8 +115,8 @@ div:only-child>.sd-element--with-frame:not(.sd-element--collapsed) {
   &.sd-question--paneldynamic {
     border: 1px solid $border-light;
     box-sizing: border-box;
-    padding-left: var(--sd-base-padding);
-    padding-right: var(--sd-base-padding);
+    padding-inline-start: var(--sd-base-padding);
+    padding-inline-end: var(--sd-base-padding);
     margin-top: var(--sd-base-vertical-padding);
 
     &>.sd-element__header--location-top {

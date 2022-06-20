@@ -1,18 +1,22 @@
 .sd-panel {
   position: relative;
+
   .sd-row {
     margin-top: calcSize(1);
   }
+
   .sd-row:first-child {
     margin-top: 0;
   }
 }
+
 .sd-panel__required-text {
   color: $red;
 }
+
 .sd-panel__footer {
   box-sizing: border-box;
-  padding-left: calc(var(--sd-base-padding) - 3 * #{$base-unit});
+  padding-inline-start: calc(var(--sd-base-padding) - 3 * #{$base-unit});
   margin-left: calc(-1 * var(--sd-base-padding));
   width: calc(100% + 2 * var(--sd-base-padding));
   margin-bottom: calc(-1 * var(--sd-base-padding) + 0.5 * var(--sd-base-vertical-padding));

@@ -182,9 +182,9 @@
   }
 
   &:not(.sd-element--with-frame) {
-    padding-right: var(--sd-base-padding);
+    padding-inline-end: var(--sd-base-padding);
     margin-right: calc(-1 * var(--sd-base-padding));
-    padding-left: var(--sd-base-padding);
+    padding-inline-start: var(--sd-base-padding);
     margin-left: calc(-1 * var(--sd-base-padding));
     box-sizing: content-box;
   }
