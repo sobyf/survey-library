@@ -46,7 +46,7 @@
   height: calc(100% - #{$base-unit} * 3);
   max-width: 30%;
   padding-inline-end: calcSize(2);
-  border-right: 1px solid $border;
+  border-inline-end: 1px solid $border;
   word-break: break-word;
   white-space: normal;
   color: $foreground-light;
