@@ -8,6 +8,7 @@ import { CustomError } from "./error";
 import { settings } from "./settings";
 import { QuestionTextBase } from "./question_textbase";
 import { ExpressionRunner } from "./conditions";
+import { sanitizeEditableContent } from "./utils/utils";
 
 /**
  * A Model for an input text question.
@@ -374,6 +375,9 @@ export class QuestionTextModel extends QuestionTextBase {
       style.width = this.inputWidth;
     }
     return style;
+  }
+  public sanitizeOnChange(event: any) {
+    sanitizeEditableContent(event.target);
   }
 }
 

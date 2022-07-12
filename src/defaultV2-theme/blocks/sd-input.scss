@@ -36,3 +36,16 @@
 .sd-input--error {
   background-color: $red-light;
 }
+
+span.sd-input {
+  display: block;
+}
+
+span.sd-input[placeholder]:empty::before {
+    content: attr(placeholder);
+    color: $foreground-light; 
+}
+
+span.sd-input--disabled[placeholder]:empty::before {
+  color: $foreground-disabled;
+}

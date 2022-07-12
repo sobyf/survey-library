@@ -121,3 +121,19 @@ registerMarkupTest({
   },
   snapshot: "text-datalist",
 });
+registerMarkupTest(
+  {
+    name: "Test Text question as contenteditable",
+    json: {
+      questions: [
+        {
+          name: "name",
+          type: "text",
+          renderAs: "contenteditable",
+          title: "Question title",
+          titleLocation: "hidden"
+        }
+      ]
+    },
+    snapshot: "text-contenteditable",
+  });
