@@ -1,5 +1,5 @@
 <div *ngIf="survey.isLogoBefore" [class]="survey.logoClassNames">
-  <ng-template [component]="{ name: survey.getElementWrapperComponentName(survey, 'logo-image'), data: { data: survey.getElementWrapperComponentData(survey, 'logo-image') } }"></ng-template>
+  <ng-template [surveyComponent]="{ name: survey.getElementWrapperComponentName(survey, 'logo-image'), data: { data: survey.getElementWrapperComponentData(survey, 'logo-image') } }"></ng-template>
 </div>
 <div
   *ngIf="survey.renderedHasTitle"
@@ -11,6 +11,6 @@
 </div>
 
 <div *ngIf="survey.isLogoAfter" [class]="survey.logoClassNames">
-  <ng-template [component]="{ name: survey.getElementWrapperComponentName(survey, 'logo-image'), data: { data: survey.getElementWrapperComponentData(survey, 'logo-image') } }"></ng-template>
+  <ng-template [surveyComponent]="{ name: survey.getElementWrapperComponentName(survey, 'logo-image'), data: { data: survey.getElementWrapperComponentData(survey, 'logo-image') } }"></ng-template>
 </div>
 <div [class]="survey.css.headerClose"></div>

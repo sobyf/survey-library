@@ -8,15 +8,15 @@ interface IDynamicComponent {
 }
 
 @Directive({
-  selector: "[component]"
+  selector: "[surveyComponent]"
 })
 
 export class DynamicComponentDirective implements OnChanges {
   constructor(private containerRef: ViewContainerRef, private templateRef: TemplateRef<unknown>) { }
-  @Input() component!: IDynamicComponent;
+  @Input() surveyComponent!: IDynamicComponent;
   private componentInstance: any;
   ngOnChanges(changes: SimpleChanges): void {
-    const componentChanges = changes["component"];
+    const componentChanges = changes["surveyComponent"];
     if(componentChanges.currentValue.name !== componentChanges.previousValue?.name ||
       (componentChanges.currentValue.name === undefined && componentChanges.previousValue === undefined && !this.componentInstance)) {
       this.createComponent();
@@ -26,20 +26,20 @@ export class DynamicComponentDirective implements OnChanges {
   }
   createComponent(): void {
     this.containerRef.clear();
-    if(AngularComponentFactory.Instance.isComponentRegistered(this.component.name)) {
-      this.componentInstance = AngularComponentFactory.Instance.create(this.containerRef, this.component.name).instance;
-    } else if (this.component.default) {
-      this.componentInstance = AngularComponentFactory.Instance.create(this.containerRef, this.component.default).instance;
+    if(AngularComponentFactory.Instance.isComponentRegistered(this.surveyComponent.name)) {
+      this.componentInstance = AngularComponentFactory.Instance.create(this.containerRef, this.surveyComponent.name).instance;
+    } else if (this.surveyComponent.default) {
+      this.componentInstance = AngularComponentFactory.Instance.create(this.containerRef, this.surveyComponent.default).instance;
     }
     if(!this.componentInstance) {
-      throw new Error(`Can't create component with name: ${this.component.name} and default: ${this.component.default}`);
+      throw new Error(`Can't create component with name: ${this.surveyComponent.name} and default: ${this.surveyComponent.default}`);
     } else {
       this.componentInstance.contentTempl = this.templateRef;
     }
     this.updateComponentData();
   }
   updateComponentData(): void {
-    const data = this.component.data;
+    const data = this.surveyComponent.data;
     Object.keys(data).forEach((key) => {
       this.componentInstance[key] = data[key];
     });

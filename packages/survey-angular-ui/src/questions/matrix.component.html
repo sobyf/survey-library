@@ -5,10 +5,10 @@
       <table [class]="model.getTableCss()">
         <thead *ngIf="model.showHeader">
           <tr>
-            <td [visible]="model.hasRows"></td>
+            <td [surveyVisible]="model.hasRows"></td>
             <th
               *ngFor="let column of model.visibleColumns" [class]="model.cssClasses.headerCell">
-              <ng-template [component]="{ name: model.getColumnHeaderWrapperComponentName(column), data: { componentData: model.getColumnHeaderWrapperComponentData(column) } }">
+              <ng-template [surveyComponent]="{ name: model.getColumnHeaderWrapperComponentName(column), data: { componentData: model.getColumnHeaderWrapperComponentData(column) } }">
                 <sv-ng-string [model]="column.locText"></sv-ng-string>
               </ng-template>
             </th>
@@ -17,7 +17,7 @@
         <tbody>
           <tr *ngFor="let row of model.visibleRows; trackBy: trackRowByFn " [class]="row.rowClasses || undefined">
            <td [class]="model.cssClasses.rowTextCell" *ngIf="model.hasRows">
-              <ng-template [component]="{ name: model.getRowHeaderWrapperComponentName($any(row)), data: { componentData: model.getRowHeaderWrapperComponentData($any(row)) } }">
+              <ng-template [surveyComponent]="{ name: model.getRowHeaderWrapperComponentName($any(row)), data: { componentData: model.getRowHeaderWrapperComponentData($any(row)) } }">
                 <sv-ng-string [model]="row.locText"></sv-ng-string>
               </ng-template>
             </td>
@@ -52,7 +52,7 @@
                       <use [attr.xlink:href]="model.itemSvgIcon"></use>
                     </svg> 
                   </span>
-                  <span [visible]="model.isMobile" [class]="model.cssClasses.cellResponsiveTitle" [model]="column.locText" sv-ng-string></span>
+                  <span [surveyVisible]="model.isMobile" [class]="model.cssClasses.cellResponsiveTitle" [model]="column.locText" sv-ng-string></span>
                 </label>
               </td>
             </ng-container>

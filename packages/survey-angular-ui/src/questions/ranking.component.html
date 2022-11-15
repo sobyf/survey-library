@@ -1,5 +1,5 @@
 <div [class]="model.rootClass" #contentElement>
   <ng-container *ngFor="let item of model.rankingChoices; index as index; trackBy: trackItemBy">
-    <ng-template [component]="{ name: getItemValueComponentName(item), data: getItemValueComponentData(item, index) }"></ng-template>
+    <ng-template [surveyComponent]="{ name: getItemValueComponentName(item), data: getItemValueComponentData(item, index) }"></ng-template>
   </ng-container>
 </div>

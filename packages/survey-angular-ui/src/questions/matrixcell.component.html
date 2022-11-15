@@ -3,16 +3,16 @@
     <sv-ng-matrix-drag-drop-icon *ngIf="cell.isDragHandlerCell" [model]="$any({ data: { row: row, question: question } })"></sv-ng-matrix-drag-drop-icon>
     <sv-action-bar *ngIf="cell.isActionsCell" [model]="cell.item.getData()" [handleClick]="false"></sv-action-bar>
     <ng-container *ngIf="cell.hasPanel">
-      <ng-template [component]="{ name: panelComponentName, data: panelComponentData }"></ng-template>
+      <ng-template [surveyComponent]="{ name: panelComponentName, data: panelComponentData }"></ng-template>
     </ng-container>
-    <div *ngIf="cell.hasQuestion" [class]="question.cssClasses.cellQuestionWrapper" [visible]="cell.question.isVisible">
+    <div *ngIf="cell.hasQuestion" [class]="question.cssClasses.cellQuestionWrapper" [surveyVisible]="cell.question.isVisible">
       <div *ngIf="cell.showErrorOnTop && cell.question.hasVisibleErrors" [element]="cell.question" [location]="'top'" sv-ng-errors></div>
       <ng-container *ngIf="!cell.isChoice && cell.question.isDefaultRendering()">
-          <ng-template [component]="{ name: question.getCellWrapperComponentName(cell.cell), data: { componentData: question.getCellWrapperComponentData(cell.cell)} }">
-            <ng-template  [component]="{ name: getComponentName(cell.question), data: { model: cell.question } }"></ng-template>
+          <ng-template [surveyComponent]="{ name: question.getCellWrapperComponentName(cell.cell), data: { componentData: question.getCellWrapperComponentData(cell.cell)} }">
+            <ng-template  [surveyComponent]="{ name: getComponentName(cell.question), data: { model: cell.question } }"></ng-template>
           </ng-template>
       </ng-container>
-      <ng-template *ngIf="!cell.isChoice && !cell.question.isDefaultRendering()" [component]="{ name: cell.question.getComponentName(), data: { model: cell.question } }">
+      <ng-template *ngIf="!cell.isChoice && !cell.question.isDefaultRendering()" [surveyComponent]="{ name: cell.question.getComponentName(), data: { model: cell.question } }">
       </ng-template>
       <sv-ng-selebase-item
         *ngIf="cell.isItemChoice"
@@ -26,7 +26,7 @@
       <div *ngIf="cell.question.isErrorsModeTooltip && cell.question.hasVisibleErrors" [element]="cell.question" [location]="'tooltip'" sv-ng-errors></div>
     </div>
     <ng-container *ngIf="cell.hasTitle">
-      <ng-template [component]="{ name: question.getCellWrapperComponentName($any(cell)), data: { componentData: question.getCellWrapperComponentData($any(cell))} }">
+      <ng-template [surveyComponent]="{ name: question.getCellWrapperComponentName($any(cell)), data: { componentData: question.getCellWrapperComponentData($any(cell))} }">
         <sv-ng-string [model]="cell.locTitle"></sv-ng-string>
         <span *ngIf="!!cell.requiredText" [class]="question.cssClasses.cellRequiredText">{{ cell.requiredText }}</span>  
       </ng-template>

@@ -8,7 +8,7 @@
           <sv-timer-panel [model]="model.timerModel"></sv-timer-panel>
         </ng-container>
         <ng-container *ngIf="model.isShowProgressBarOnTop && !model.isShowStartingPage">
-          <ng-template [component]='{ name: "sv-progress-" + this.model.progressBarType, data: { model } }'></ng-template>
+          <ng-template [surveyComponent]='{ name: "sv-progress-" + this.model.progressBarType, data: { model } }'></ng-template>
         </ng-container>
         <div *ngIf="model.isShowingPage" [class]="model.bodyCss" [style.width]="model.renderedWidth" [style.maxWidth]="model.renderedWidth">
           <sv-action-bar *ngIf="model.isNavigationButtonsShowingOnTop" [model]="model.navigationBar"></sv-action-bar>
@@ -24,7 +24,7 @@
             <!-- /ko -->
           <!-- /ko -->
           <ng-container *ngIf="model.isShowProgressBarOnBottom && !model.isShowStartingPage">
-            <ng-template [component]='{ name: "sv-progress-" + this.model.progressBarType, data: { model } }'></ng-template>
+            <ng-template [surveyComponent]='{ name: "sv-progress-" + this.model.progressBarType, data: { model } }'></ng-template>
           </ng-container>
           <ng-container *ngIf="model.isTimerPanelShowingOnBottom && !model.isShowStartingPage">
             <sv-timer-panel [model]="model.timerModel"></sv-timer-panel>

@@ -2,14 +2,14 @@ import { Directive, ElementRef, Input, SimpleChanges, OnChanges, OnDestroy } fro
 import { doKey2ClickDown, doKey2ClickUp, doKey2ClickBlur, IAttachKey2clickOptions } from "survey-core";
 
 @Directive({
-  selector: "[key2click]"
+  selector: "[surveyKey2Click]"
 })
 export class Key2ClickDirective implements OnChanges, OnDestroy {
   static defaultOptions: IAttachKey2clickOptions = { processEsc: true, disableTabStop: false };
   private isSubscribed = false;
 
   options?: IAttachKey2clickOptions = Key2ClickDirective.defaultOptions;
-  @Input() key2click?: IAttachKey2clickOptions;
+  @Input() surveyKey2Click?: IAttachKey2clickOptions;
 
   private onkeydown (evt: any) {
     doKey2ClickDown(evt, this.options);

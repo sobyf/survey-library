@@ -1,13 +1,13 @@
 <div
 [class]="model.cssClasses.root"
 [style.height]="model.signatureHeight + 'px'" [style.width]="model.signatureWidth + 'px'" #contentElement>
-<div [class]="model.cssClasses.placeholder" [visible]="model.needShowPlaceholder()">
+<div [class]="model.cssClasses.placeholder" [surveyVisible]="model.needShowPlaceholder()">
   {{ model.placeHolderText }}
 </div>
 <div>
   <canvas tabindex="0"></canvas>
 </div>
-<div [class]="model.cssClasses.controls" [visible]="model.canShowClearButton">
+<div [class]="model.cssClasses.controls" [surveyVisible]="model.canShowClearButton">
   <button
     type="button"
     [class]="model.cssClasses.clearButton"

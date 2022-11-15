@@ -60,13 +60,13 @@
     <div [class]="model.cssClasses.fileList || undefined" *ngIf="!model.isEmpty()">
       <span
         *ngFor="let val of model.previewValue; index as index; trackBy: trackFilesFn"
-        [visible]="val && model.isPreviewVisible(index)"
+        [surveyVisible]="val && model.isPreviewVisible(index)"
         [class]="model.cssClasses.preview"
       >
         <div *ngIf="val.name && model.cssClasses.fileSign" [class]="model.cssClasses.fileSign">
           <a
             (click)="model.doDownloadFile($event, val)"
-            [attr.href]="val.content | safeUrl"
+            [attr.href]="val.content | surveySafeUrl"
             [attr.title]="val.name"
             [attr.download]="val.name"
             [style.width]="model.imageWidth"
@@ -76,7 +76,7 @@
         <div [class]="model.cssClasses.imageWrapper">
           <img
             *ngIf="model.canPreviewImage(val)"
-            [attr.src]="val.content | safeUrl"
+            [attr.src]="val.content | surveySafeUrl"
             [style.height]="model.imageHeight"
             [style.width]="model.imageWidth"
             alt="File preview"
@@ -94,7 +94,7 @@
         <div *ngIf="val.name && model.cssClasses.fileSignBottom" [class]="model.cssClasses.fileSignBottom">
           <a
             (click)="model.doDownloadFile($event, val)"
-            [attr.href]="val.content | safeUrl"
+            [attr.href]="val.content | surveySafeUrl"
             [attr.title]="val.name"
             [attr.download]="val.name"
             [style.width]="model.imageWidth"

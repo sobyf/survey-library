@@ -1,13 +1,13 @@
 import { Directive, ElementRef, Input, OnChanges, SimpleChanges } from "@angular/core";
 
 @Directive({
-  selector: "[visible]"
+  selector: "[surveyVisible]"
 })
 export class VisibleDirective implements OnChanges {
   constructor(private el: ElementRef) { }
-  @Input() visible?: boolean;
+  @Input() surveyVisible?: boolean;
   ngOnChanges(changes: SimpleChanges): void {
-    changes["visible"].currentValue ? this.show() : this.hide();
+    changes["surveyVisible"].currentValue ? this.show() : this.hide();
   }
   private hide() {
     this.el.nativeElement.style.display = "none";

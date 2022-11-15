@@ -19,7 +19,7 @@
   <iframe
     *ngIf="model.renderedMode === 'youtube'"
     [class]="model.getImageCss()"
-    [attr.src]="model.locImageLink.renderedHtml | safeResourceUrl"
+    [attr.src]="model.locImageLink.renderedHtml | surveySafeResourceUrl"
     [attr.width]="model.renderedWidth"
     [attr.height]="model.renderedHeight"
     [style]="{ objectFit: model.imageFit }"

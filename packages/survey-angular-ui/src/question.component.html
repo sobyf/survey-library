@@ -2,9 +2,9 @@
   <div *ngIf="!!model" #elementContainer [class]="model.getRootCss()" [style]="{ paddingLeft: model.paddingLeft, paddingRight: model.paddingRight }" [id]="model.id" [attr.data-name]="model.name" [attr.role]="model.ariaRole" [attr.aria-required]="model.ariaRequired" [attr.aria-invalid]="model.ariaInvalid" [attr.aria-labelledby]="model.hasTitle ? model.ariaTitleId : null">
     <div *ngIf="model.showErrorsAboveQuestion && model.hasVisibleErrors" [element]="model" sv-ng-errors></div>
     <div [element]="model" *ngIf="model.hasTitleOnLeftTop" sv-ng-element-header></div>
-    <div [class]="model.cssContent" role="presentation" [visible]="!model.isCollapsed">
+    <div [class]="model.cssContent" role="presentation" [surveyVisible]="!model.isCollapsed">
       <div *ngIf="model.showErrorOnTop && model.hasVisibleErrors" [element]="model" sv-ng-errors></div>
-      <ng-template [component]="{ name: getQuestionContentWrapperComponentName(), data: getQuestionContentWrapperComponentData(), default: 'skeleton-question' }">
+      <ng-template [surveyComponent]="{ name: getQuestionContentWrapperComponentName(), data: getQuestionContentWrapperComponentData(), default: 'skeleton-question' }">
       </ng-template>
       <div *ngIf="model.hasComment" [class]="model.cssClasses.formGroup">
         <div>{{ model.commentText }}</div>

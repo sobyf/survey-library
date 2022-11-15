@@ -5,7 +5,7 @@
       <sv-ng-string [model]="model.locDescription"></sv-ng-string>
     </div>
     <ng-container *ngFor="let row of model.rows">
-      <ng-template [component]="{ name: $any(model.survey).getRowWrapperComponentName(row), data: { componentData: $any(model.survey).getRowWrapperComponentData(row) } }">
+      <ng-template [surveyComponent]="{ name: $any(model.survey).getRowWrapperComponentName(row), data: { componentData: $any(model.survey).getRowWrapperComponentData(row) } }">
         <sv-ng-row [row]="row"></sv-ng-row>
       </ng-template>
     </ng-container>

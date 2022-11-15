@@ -6,7 +6,7 @@ import { AngularComponentFactory } from "../component-factory";
 
 @Component({
   selector: "sv-ng-custom-question",
-  template: "<ng-template [component]='{ name: getComponentName(contentQuestion), data: { model: contentQuestion } }'></ng-template>"
+  template: "<ng-template [surveyComponent]='{ name: getComponentName(contentQuestion), data: { model: contentQuestion } }'></ng-template>"
 })
 export class CustomQuestionComponent extends QuestionAngular<QuestionCustomModel> {
   get contentQuestion(): Question {

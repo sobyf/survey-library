@@ -6,7 +6,7 @@
         [attr.aria-describedby]="model.ariaDescribedBy" [attr.role]="model.ariaRole">
         <div [class]="model.cssClasses.controlValue">
             <ng-container *ngIf="model.showInputFieldComponent">
-                <ng-template [component]="{ name: model.inputFieldComponentName, data: { model: dropdownModel.getSelectedAction(), question: model } }"></ng-template>
+                <ng-template [surveyComponent]="{ name: model.inputFieldComponentName, data: { model: dropdownModel.getSelectedAction(), question: model } }"></ng-template>
             </ng-container>
             <sv-ng-string *ngIf="model.showSelectedItemLocText" [model]="model.selectedItemLocText"></sv-ng-string>
             <input #inputElement type="text" autocomplete="off" [(ngModel)]="dropdownModel.filterString" [class]="model.cssClasses.filterStringInput"
@@ -17,7 +17,7 @@
             (change)="inputChange($event)" (blur)="blur($event)" />
         </div>
         <div *ngIf="(model.allowClear && model.cssClasses.cleanButtonIconId)"
-            [class]="model.cssClasses.cleanButton" (click)="clear($event)" [visible]="!model.isEmpty()">
+            [class]="model.cssClasses.cleanButton" (click)="clear($event)" [surveyVisible]="!model.isEmpty()">
             <!-- ko component: { name: 'sv-svg-icon', params: { css: model.cssClasses.cleanButtonSvg, iconName: model.cssClasses.cleanButtonIconId, size: 'auto' } } -->
             <!-- /ko -->
             <svg [iconName]="model.cssClasses.cleanButtonIconId" [partCss]="model.cssClasses.cleanButtonSvg" [title]="model.clearCaption"

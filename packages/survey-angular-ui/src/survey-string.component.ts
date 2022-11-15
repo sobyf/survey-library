@@ -4,7 +4,7 @@ import { LocalizableString } from "survey-core";
 @Component(
   {
     selector: "sv-ng-string, '[sv-ng-string]'",
-    template: "<ng-template [component]='{ name: model.renderAs, data: { model: model.renderAsData } }'></ng-template>"
+    template: "<ng-template [surveyComponent]='{ name: model.renderAs, data: { model: model.renderAsData } }'></ng-template>"
   }
 )
 export class SurveyStringComponent {
