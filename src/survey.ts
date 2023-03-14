@@ -1272,6 +1272,119 @@ export class SurveyModel extends SurveyElementCore
   public set tocLocation(val: "left" | "right") {
     this.setPropertyValue("tocLocation", val);
   }
+
+  // /**
+  //  * Gets or sets the visibility of the navigation buttons.
+  //  *
+  //  * Default value: `true`
+  //  * @see navigationLocation
+  //  */
+  // public get showNavigation(): boolean {
+  //   return this.getPropertyValue("showNavigation");
+  // }
+  // public set showNavigation(val: boolean) {
+  //   this.setPropertyValue("showNavigation", val);
+  // }
+  // /**
+  //  * Gets or sets the position of the navigation buttons. Applies only when the navigation buttons are visible.
+  //  *
+  //  * Possible values:
+  //  *
+  //  * - `"bottom"` (default)
+  //  * - `"top"`
+  //  * - `"both"`
+  //  * @see showNavigation
+  //  */
+  // public get navigationLocation(): "top" | "bottom" | "both" {
+  //   return this.getPropertyValue("navigationLocation");
+  // }
+  // public set navigationLocation(val: "top" | "bottom" | "both") {
+  //   this.setPropertyValue("navigationLocation", val);
+  // }
+
+  // /**
+  //  * Gets or sets the visibility of the progress bar.
+  //  *
+  //  * Default value: `true`
+  //  * @see progressBarLocation
+  //  */
+  // public get showProgressBar(): boolean {
+  //   return this.getPropertyValue("showProgressBar");
+  // }
+  // public set showProgressBar(val: boolean) {
+  //   this.setPropertyValue("showProgressBar", val);
+  // }
+  // /**
+  //  * Gets or sets the position of the progress bar. Applies only when the progress bar is visible.
+  //  *
+  //  * Possible values:
+  //  *
+  //  * - `"top"` (default)
+  //  * - `"bottom"`
+  //  * - `"topBottom"`
+  //  * @see showProgressBar
+  //  */
+  // public get progressBarLocation(): "top" | "bottom" | "topBottom" {
+  //   return this.getPropertyValue("progressBarLocation");
+  // }
+  // public set progressBarLocation(val: "top" | "bottom" | "topBottom") {
+  //   this.setPropertyValue("progressBarLocation", val);
+  // }
+  // /**
+  //  * Gets or sets the progress bar mode.
+  //  *
+  //  * "pages" | "questions" | "requiredquestions" | "correctquestions"
+  //  * Default value: `pages`
+  //  * @see showProgressBar
+  //  */
+  // public get progressBarMode(): "pages" | "questions" | "requiredquestions" | "correctquestions" {
+  //   return this.getPropertyValue("progressBarMode");
+  // }
+  // public set progressBarMode(val: "pages" | "questions" | "requiredquestions" | "correctquestions") {
+  //   this.setPropertyValue("progressBarMode", val);
+  // }
+
+  // /**
+  //  * Gets or sets the visibility of the timer panel.
+  //  *
+  //  * Default value: `false`
+  //  * @see timerPanelLocation
+  //  */
+  // public get showTimerPanel(): boolean {
+  //   return this.getPropertyValue("showTimerPanel");
+  // }
+  // public set showTimerPanel(val: boolean) {
+  //   this.setPropertyValue("showTimerPanel", val);
+  // }
+  // /**
+  //  * Gets or sets the position of the timer panel. Applies only when the timer panel is visible.
+  //  *
+  //  * Possible values:
+  //  *
+  //  * - `"top"` (default)
+  //  * - `"bottom"`
+  //  * @see showTimerPanel
+  //  */
+  // public get timerPanelLocation(): "top" | "bottom" {
+  //   return this.getPropertyValue("timerPanelLocation");
+  // }
+  // public set timerPanelLocation(val: "top" | "bottom") {
+  //   this.setPropertyValue("timerPanelLocation", val);
+  // }
+  // /**
+  //  * Gets or sets the timer panel mode.
+  //  *
+  //  * "page" | "survey" | "combined"
+  //  * Default value: `page`
+  //  * @see showTimerPanel
+  //  */
+  // public get timerPanelMode(): "page" | "survey" | "combined" {
+  //   return this.getPropertyValue("timerPanelMode");
+  // }
+  // public set timerPanelMode(val: "page" | "survey" | "combined") {
+  //   this.setPropertyValue("timerPanelMode", val);
+  // }
+
   /**
    * Gets or sets whether the Survey displays survey title in its pages. Set it to `false` to hide a survey title.
    * @see title
