@@ -2213,3 +2213,52 @@ QUnit.test("Composite & onValueChanged", function (assert) {
 
   ComponentCollection.Instance.clear();
 });
+
+QUnit.test("composite & valueToDataCallback", (assert) => {
+  ComponentCollection.Instance.add({
+    name: "elementsettings",
+    showInToolbox: false,
+    elementsJSON: [
+      {
+        type: "comment",
+        name: "backcolor",
+        descriptionLocation: "hidden"
+      },
+    ],
+    onCreated(question) {
+      const commentQuestion = question.contentPanel.questions[0];
+      commentQuestion.valueFromDataCallback = function (val) {
+        if (!Array.isArray(val)) return "";
+        return val.join("\n");
+      };
+      commentQuestion.valueToDataCallback = function (val) {
+        if (!val) return [];
+        if (Array.isArray(val) && !val["split"]) return val;
+        return val.split("\n");
+      };
+    }
+  });
+  const survey = new SurveyModel({ elements: [{ type: "elementsettings", name: "q1" }] });
+  const commentQuestion = survey.getAllQuestions()[0].contentPanel.questions[0];
+  survey.data = { "q1": {
+    "backcolor": [1, 1]
+  } };
+  assert.equal(commentQuestion.value, "1\n1");
+  let eventValues: Array<any> = [];
+  let eventFiredCount = 0;
+  survey.onValueChanged.add((_, options) => {
+    eventValues.push(options.value);
+    eventFiredCount++;
+  });
+  commentQuestion.value = "1\n1";
+  assert.equal(commentQuestion.value, "1\n1");
+  assert.equal(eventFiredCount, 1);
+  assert.deepEqual(eventValues, [{
+    "backcolor": [
+      "1",
+      "1"
+    ]
+  }]);
+  assert.deepEqual(survey.data["q1"]["backcolor"], ["1", "1"]);
+  ComponentCollection.Instance.clear();
+});
