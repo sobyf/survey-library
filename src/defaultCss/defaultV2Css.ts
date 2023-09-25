@@ -15,6 +15,7 @@ export var defaultV2Css = {
   rootMobile: "sd-root-modern--mobile",
   rootReadOnly: "sd-root--readonly",
   rootCompact: "sd-root--compact",
+  rootFitToContainer: "sd-root-modern--full-container",
   rootBackgroundImage: "sd-root_background-image",
   container: "sd-container-modern",
   header: "sd-title sd-container-modern__title",
@@ -30,6 +31,7 @@ export var defaultV2Css = {
   clockTimerMinorText: "sd-timer__text--minor",
   clockTimerMajorText: "sd-timer__text--major",
   bodyEmpty: "sd-body sd-body--empty",
+  bodyLoading: "sd-body--loading",
   footer: "sd-footer sd-body__navigation sd-clearfix",
   title: "sd-title",
   description: "sd-description",
@@ -40,6 +42,7 @@ export var defaultV2Css = {
   navigationButton: "",
   bodyNavigationButton: "sd-btn",
   completedPage: "sd-completedpage",
+  completedBeforePage: "sd-completed-before-page",
   timerRoot: "sd-body__timer",
   navigation: {
     complete: "sd-btn--action sd-navigation__complete-btn",
@@ -218,6 +221,7 @@ export var defaultV2Css = {
   },
   checkbox: {
     root: "sd-selectbase",
+    rootMobile: "sd-selectbase--mobile",
     rootRow: "sd-selectbase--row",
     rootMultiColumn: "sd-selectbase--multi-column",
     item: "sd-item sd-checkbox sd-selectbase__item",
@@ -240,6 +244,7 @@ export var defaultV2Css = {
   },
   radiogroup: {
     root: "sd-selectbase",
+    rootMobile: "sd-selectbase--mobile",
     rootRow: "sd-selectbase--row",
     rootMultiColumn: "sd-selectbase--multi-column",
     item: "sd-item sd-radio sd-selectbase__item",
@@ -295,7 +300,7 @@ export var defaultV2Css = {
     checkboxItemIndeterminate: "sd-checkbox--intermediate",
     checkboxItemChecked: "sd-item--checked sd-checkbox--checked",
     checkboxItemDecorator: "sd-item__svg sd-checkbox__svg",
-    checkboxItemDisabled: "sd-checkbox--disabled",
+    checkboxItemDisabled: "sd-item--disabled sd-checkbox--disabled",
     controlCheckbox: "sd-visuallyhidden sd-item__control sd-checkbox__control",
     checkboxMaterialDecorator: "sd-item__decorator sd-checkbox__decorator",
     checkboxControlLabel: "sd-item__control-label",
@@ -311,13 +316,19 @@ export var defaultV2Css = {
   },
   multipletext: {
     root: "sd-multipletext",
+    rootMobile: "sd-multipletext--mobile",
     itemLabel: "sd-multipletext__item-container sd-input",
     itemLabelOnError: "sd-multipletext__item-container--error",
+    itemLabelAllowFocus: "sd-multipletext__item-container--allow-focus",
+    itemLabelAnswered: "sd-multipletext__item-container--answered",
     item: "sd-multipletext__item",
     itemTitle: "sd-multipletext__item-title",
     content: "sd-multipletext__content sd-question__content",
     row: "sd-multipletext__row",
-    cell: "sd-multipletext__cell"
+    cell: "sd-multipletext__cell",
+    cellError: "sd-multipletext__cell--error",
+    cellErrorTop: "sd-multipletext__cell--error-top",
+    cellErrorBottom: "sd-multipletext__cell--error-bottom"
   },
   dropdown: {
     root: "sd-selectbase",
@@ -533,6 +544,7 @@ export var defaultV2Css = {
   expression: "sd-expression",
   file: {
     root: "sd-file",
+    rootDragging: "sd-file--dragging",
     other: "sd-input sd-comment",
     placeholderInput: "sd-visuallyhidden",
     preview: "sd-file__preview",

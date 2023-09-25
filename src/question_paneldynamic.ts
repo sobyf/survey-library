@@ -722,7 +722,8 @@ export class QuestionPanelDynamicModel extends Question
       super.setValueCore(newValue);
     }
   }
-  protected setIsMobile(val: boolean) {
+  public setIsMobile(val: boolean) {
+    super.setIsMobile(val);
     (this.panels || []).forEach(panel => panel.elements.forEach(element => {
       if(element instanceof Question) {
         (element as Question).isMobile = val;
@@ -1477,7 +1478,7 @@ export class QuestionPanelDynamicModel extends Question
         this.survey.dynamicPanelAdded(this);
       }
     }
-    this.recalculateIsReadyValue();
+    this.updateIsReady();
     if(this.isReadOnly || !this.allowAddPanel) {
       this.updateNoEntriesTextDefaultLoc();
     }
@@ -1498,7 +1499,7 @@ export class QuestionPanelDynamicModel extends Question
   }
   public runCondition(values: HashTable<any>, properties: HashTable<any>) {
     super.runCondition(values, properties);
-    this.runPanelsCondition(values, properties);
+    this.runPanelsCondition(this.panels, values, properties);
   }
   private reRunCondition() {
     if (!this.data) return;
@@ -1507,10 +1508,7 @@ export class QuestionPanelDynamicModel extends Question
       this.getDataFilteredProperties()
     );
   }
-  protected runPanelsCondition(
-    values: HashTable<any>,
-    properties: HashTable<any>
-  ) {
+  protected runPanelsCondition(panels: PanelModel[], values: HashTable<any>, properties: HashTable<any>): void {
     var cachedValues: { [index: string]: any } = {};
     if (values && values instanceof Object) {
       cachedValues = JSON.parse(JSON.stringify(values));
@@ -1518,8 +1516,9 @@ export class QuestionPanelDynamicModel extends Question
     if (!!this.parentQuestion && !!this.parent) {
       cachedValues[QuestionPanelDynamicItem.ParentItemVariableName] = (<any>this.parent).getValue();
     }
-    for (var i = 0; i < this.panels.length; i++) {
-      const panel = this.panels[i];
+    this.isValueChangingInternally = true;
+    for (var i = 0; i < panels.length; i++) {
+      const panel = panels[i];
       var panelValues = this.getPanelItemData(panel.data);
       //Should be unique for every panel due async expression support
       const newValues = Helpers.createCopy(cachedValues);
@@ -1530,14 +1529,13 @@ export class QuestionPanelDynamicModel extends Question
       newProps[panelName] = panel;
       panel.runCondition(newValues, newProps);
     }
+    this.isValueChangingInternally = false;
   }
-  onAnyValueChanged(name: string) {
-    super.onAnyValueChanged(name);
+  onAnyValueChanged(name: string, questionName: string): void {
+    super.onAnyValueChanged(name, questionName);
     for (var i = 0; i < this.panels.length; i++) {
-      this.panels[i].onAnyValueChanged(name);
-      this.panels[i].onAnyValueChanged(
-        QuestionPanelDynamicItem.ItemVariableName
-      );
+      this.panels[i].onAnyValueChanged(name, questionName);
+      this.panels[i].onAnyValueChanged(QuestionPanelDynamicItem.ItemVariableName, "");
     }
   }
   private hasKeysDuplicated(fireCallback: boolean, rec: any = null) {
@@ -1759,6 +1757,9 @@ export class QuestionPanelDynamicModel extends Question
     panel.renderWidth = "100%";
     panel.updateCustomWidgets();
     new QuestionPanelDynamicItem(this, panel);
+    if(!this.isDesignMode && !this.isReadOnly && !this.isValueEmpty(panel.getValue())) {
+      this.runPanelsCondition([panel], this.getDataFilteredValues(), this.getDataFilteredProperties());
+    }
     panel.onFirstRendering();
     var questions = panel.questions;
     for (var i = 0; i < questions.length; i++) {
@@ -1768,7 +1769,7 @@ export class QuestionPanelDynamicModel extends Question
     panel.onGetFooterActionsCallback = () => {
       return this.getPanelActions(panel);
     };
-    panel.footerToolbarCss = this.cssClasses.panelFooter;
+    panel.onGetFooterToolbarCssCallback = () => { return this.cssClasses.panelFooter; };
     panel.registerPropertyChangedHandlers(["visible"], () => {
       if(panel.visible) this.onPanelAdded(panel);
       else this.onPanelRemoved(panel);
@@ -1825,7 +1826,7 @@ export class QuestionPanelDynamicModel extends Question
     if (newValue === undefined) {
       this.setValueBasedOnPanelCount();
     }
-    this.recalculateIsReadyValue();
+    this.updateIsReady();
   }
   private isAllPanelsEmpty(): boolean {
     for (var i = 0; i < this.panels.length; i++) {
@@ -1854,24 +1855,7 @@ export class QuestionPanelDynamicModel extends Question
       q.onSurveyValueChanged(values[q.getValueName()]);
     }
   }
-  private onReadyChangedCallback = () => {
-    this.recalculateIsReadyValue();
-  };
-  recalculateIsReadyValue(): void {
-    let isReady: boolean = true;
-    this.panels.forEach(panel => {
-      panel.questions.forEach(q => {
-        if(!q.isReady) {
-          isReady = false;
-          q.onReadyChanged.add(this.onReadyChangedCallback);
-        } else {
-          q.onReadyChanged.remove(this.onReadyChangedCallback);
-        }
-      });
-    });
-    this.isReady = isReady;
-  }
-  protected onSetData() {
+  protected onSetData(): void {
     super.onSetData();
     if (this.useTemplatePanel) {
       this.setTemplatePanelSurveyImpl();
@@ -2150,10 +2134,20 @@ export class QuestionPanelDynamicModel extends Question
     this.updateFooterActionsCallback();
     this.footerToolbarValue.setItems(items);
   }
-  private createTabByPanel(panel: PanelModel) {
+  private createTabByPanel(panel: PanelModel, visPanelIndex: number) {
     if(!this.isRenderModeTab) return;
 
     const locTitle = new LocalizableString(panel, true);
+    locTitle.onGetTextCallback = (str: string): string => {
+      if(!this.survey) return str;
+      const options = {
+        title: str,
+        panel: panel,
+        visiblePanelIndex: visPanelIndex
+      };
+      this.survey.dynamicPanelGetTabTitle(this, options);
+      return options.title;
+    };
     locTitle.sharedData = this.locTemplateTabTitle;
     const isActive = this.getPanelIndexById(panel.id) === this.currentIndex;
     const newItem = new Action({
@@ -2194,13 +2188,16 @@ export class QuestionPanelDynamicModel extends Question
     if(!this.isRenderModeTab) return;
 
     const items: Array<Action> = [];
-    this.visiblePanels.forEach(panel => items.push(this.createTabByPanel(panel)));
+    const visPanels = this.visiblePanels;
+    for(let i = 0; i < visPanels.length; i ++) {
+      this.visiblePanels.forEach(panel => items.push(this.createTabByPanel(visPanels[i], i)));
+    }
     this.additionalTitleToolbar.setItems(items);
   }
   private addTabFromToolbar(panel: PanelModel, index: number) {
     if(!this.isRenderModeTab) return;
 
-    const newItem = this.createTabByPanel(panel);
+    const newItem = this.createTabByPanel(panel, index);
     this.additionalTitleToolbar.actions.splice(index, 0, newItem);
     this.updateTabToolbarItemsPressedState();
   }

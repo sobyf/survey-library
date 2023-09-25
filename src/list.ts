@@ -315,10 +315,11 @@ export class ListModel<T extends BaseAction = Action> extends ActionContainer<T>
     }
   }
 
-  dispose(): void {
+  public dispose(): void {
     super.dispose();
     if(!!this.loadingIndicatorValue) {
       this.loadingIndicatorValue.dispose();
     }
+    this.listContainerHtmlElement = undefined;
   }
 }

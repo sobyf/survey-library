@@ -19,7 +19,8 @@ export interface ISurveyData {
     name: string,
     newValue: any,
     locNotification: any,
-    allowNotifyValueChanged?: boolean
+    allowNotifyValueChanged?: boolean,
+    questionName?: string
   ): any;
   getVariable(name: string): any;
   setVariable(name: string, newValue: any): void;
@@ -41,7 +42,10 @@ export interface ITextProcessor {
 export interface ISurveyErrorOwner extends ILocalizableOwner {
   getErrorCustomText(text: string, error: SurveyError): string;
 }
-
+export interface IValueItemCustomPropValues {
+  propertyName: string;
+  values: Array<any>;
+}
 export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   getSkeletonComponentName(element: ISurveyElement): string;
   currentPage: IPage;
@@ -82,7 +86,7 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   validateQuestion(question: IQuestion): SurveyError;
   validatePanel(panel: IPanel): SurveyError;
   hasVisibleQuestionByValueName(valueName: string): boolean;
-  questionCountByValueName(valueName: string): number;
+  questionsByValueName(valueName: string): Array<IQuestion>;
   processHtml(html: string, reason: string): string;
   getSurveyMarkdownHtml(element: Base, text: string, name: string): string;
   getRendererForString(element: Base, name: string): string;
@@ -186,7 +190,7 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   canChangeChoiceItemsVisibility(): boolean;
   getChoiceItemVisibility(question: IQuestion, item: any, val: boolean): boolean;
   loadQuestionChoices(options: { question: IQuestion, filter: string, skip: number, take: number, setItems: (items: Array<any>, totalCount: number) => void }): void;
-  getChoiceDisplayValue(options: { question: IQuestion, values: Array<any>, setItems: (displayValues: Array<string>) => void }): void;
+  getChoiceDisplayValue(options: { question: IQuestion, values: Array<any>, setItems: (displayValues: Array<string>, ...customValues: Array<IValueItemCustomPropValues>) => void }): void;
   matrixRowAdded(question: IQuestion, row: any): any;
   matrixColumnAdded(question: IQuestion, column: any): void;
   matrixBeforeRowAdded(options: {
@@ -213,6 +217,7 @@ export interface ISurvey extends ITextProcessor, ISurveyErrorOwner {
   dynamicPanelRemoved(question: IQuestion, panelIndex: number, panel: IPanel): void;
   dynamicPanelRemoving(question: IQuestion, panelIndex: number, panel: IPanel): boolean;
   dynamicPanelItemValueChanged(question: IQuestion, options: any): any;
+  dynamicPanelGetTabTitle(question: IQuestion, options: any): any;
 
   dragAndDropAllow(options: DragDropAllowEvent): boolean;
 
@@ -253,7 +258,7 @@ export interface ISurveyElement extends IShortcutText {
   getType(): string;
   setVisibleIndex(value: number): number;
   locStrsChanged(): any;
-  delete(): any;
+  delete(doDispose?: boolean): void;
   toggleState(): void;
   stateChangedCallback(): void;
   getTitleToolbar(): AdaptiveActionContainer;
@@ -279,7 +284,7 @@ export interface IElement extends IConditionRunner, ISurveyElement {
   getLayoutType(): string;
   isLayoutTypeSupported(layoutType: string): boolean;
   removeElement(el: IElement): boolean;
-  onAnyValueChanged(name: string): any;
+  onAnyValueChanged(name: string, questionName: string): void;
   updateCustomWidgets(): any;
   clearIncorrectValues(): any;
   clearErrors(): any;

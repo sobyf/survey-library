@@ -66,11 +66,11 @@ export abstract class SurveyElementCore extends Base implements ILocalizableOwne
   }) description: string;
   public updateDescriptionVisibility(newDescription: any) {
     let showPlaceholder = false;
-    if(this.isDesignMode) {
+    if (this.isDesignMode) {
       const property: JsonObjectProperty = Serializer.findProperty(this.getType(), "description");
       showPlaceholder = !!(property?.placeholder);
     }
-    this.hasDescription = !!newDescription || showPlaceholder;
+    this.hasDescription = !!newDescription || (showPlaceholder && this.isDesignMode);
   }
 
   get locDescription(): LocalizableString {
@@ -423,6 +423,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
       this.onSetData();
     }
     if (!!this.survey) {
+      this.updateDescriptionVisibility(this.description);
       this.clearCssClasses();
     }
   }
@@ -542,7 +543,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
   public get cssTitleNumber(): any {
     const css = this.cssClasses;
-    if(css.number) return css.number;
+    if (css.number) return css.number;
     return css.panel ? css.panel.number : undefined;
   }
   protected calcCssClasses(css: any): any { return undefined; }
@@ -661,7 +662,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   public get isQuestion() {
     return false;
   }
-  public delete() { }
+  public delete(doDispose: boolean): void { }
   //ILocalizableOwner
   locOwner: ILocalizableOwner;
   /**
@@ -783,19 +784,6 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return this.survey && this.survey.getCss().root == "sd-root-modern";
   }
 
-  public get isErrorsModeTooltip(): boolean {
-    return this.getIsErrorsModeTooltip();
-  }
-  protected getIsErrorsModeTooltip() {
-    return this.isDefaultV2Theme && this.hasParent && this.getIsTooltipErrorSupportedByParent();
-  }
-  protected getIsTooltipErrorSupportedByParent(): boolean {
-    return (<any>this.parent)?.getIsTooltipErrorInsideSupported();
-  }
-  protected getIsTooltipErrorInsideSupported(): boolean {
-    return false;
-  }
-
   public get hasParent() {
     return (this.parent && !this.parent.isPage && (!(<any>this.parent).originalPage || (<any>this.survey).isShowingPreview)) || (this.parent === undefined);
   }
@@ -809,11 +797,11 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
     return this.survey && (<SurveyModel>this.survey)["isCompact"];
   }
 
-  protected getHasFrameV2() : boolean {
-    return this.shouldAddRunnerStyles() && (!this.hasParent && this.isSingleInRow);
+  protected getHasFrameV2(): boolean {
+    return this.shouldAddRunnerStyles() && (!this.hasParent);
   }
   protected getIsNested(): boolean {
-    return this.shouldAddRunnerStyles() && (this.hasParent || !this.isSingleInRow);
+    return this.shouldAddRunnerStyles() && (this.hasParent);
   }
   protected getCssRoot(cssClasses: { [index: string]: string }): string {
     return new CssClassBuilder()
@@ -902,8 +890,8 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
   public getRootStyle(): object {
     const style: any = {};
-    if(!!this.paddingLeft) { style["--sv-element-add-padding-left"] = this.paddingLeft; }
-    if(!!this.paddingRight) { style["--sv-element-add-padding-right"] = this.paddingRight; }
+    if (!!this.paddingLeft) { style["--sv-element-add-padding-left"] = this.paddingLeft; }
+    if (!!this.paddingRight) { style["--sv-element-add-padding-right"] = this.paddingRight; }
     return style;
   }
   get paddingLeft(): string {
@@ -920,21 +908,43 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   }
 
   @property({ defaultValue: true }) allowRootStyle: boolean;
+  @property({ defaultValue: true }) renderMinWidth: boolean;
+
   get rootStyle() {
-    var style: { [index: string]: any } = {};
+    let style: { [index: string]: any } = {};
+    let minWidth = this.renderMinWidth ? this.minWidth : "min(100%, " + this.minWidth + ")";
     if (this.allowRootStyle && this.renderWidth) {
       // style["width"] = this.renderWidth;
       style["flexGrow"] = 1;
       style["flexShrink"] = 1;
       style["flexBasis"] = this.renderWidth;
-      style["minWidth"] = this.minWidth;
+      style["minWidth"] = minWidth;
       style["maxWidth"] = this.maxWidth;
     }
     return style;
   }
+  private isContainsSelection(el: any) {
+    let elementWithSelection: any = undefined;
+    if ((document as any)["selection"]) {
+      elementWithSelection = (document as any)["selection"].createRange().parentElement();
+    }
+    else {
+      var selection = window.getSelection();
+      if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+        if (range.startOffset !== range.endOffset) {
+          elementWithSelection = range.startContainer.parentNode;
+        }
+      }
+    }
+    return elementWithSelection == el;
+  }
   public get clickTitleFunction(): any {
     if (this.needClickTitleFunction()) {
-      return () => {
+      return (event?: MouseEvent) => {
+        if (!!event && this.isContainsSelection(event.target)) {
+          return;
+        }
         return this.processTitleClick();
       };
     }
@@ -951,7 +961,7 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
   public get additionalTitleToolbar(): ActionContainer {
     return this.getAdditionalTitleToolbar();
   }
-  protected getAdditionalTitleToolbar() : ActionContainer | null {
+  protected getAdditionalTitleToolbar(): ActionContainer | null {
     return null;
   }
   protected getCssTitle(cssClasses: any) {
@@ -973,6 +983,12 @@ export class SurveyElement<E = any> extends SurveyElementCore implements ISurvey
       this.errors.forEach(err => {
         err.updateText();
       });
+    }
+  }
+  public dispose(): void {
+    super.dispose();
+    if (this.titleToolbarValue) {
+      this.titleToolbarValue.dispose();
     }
   }
 }

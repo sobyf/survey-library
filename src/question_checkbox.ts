@@ -39,9 +39,6 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
   protected getDefaultItemComponent(): string {
     return "survey-checkbox-item";
   }
-  public get ariaRole(): string {
-    return "listbox";
-  }
   public getType(): string {
     return "checkbox";
   }
@@ -219,6 +216,11 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
     return this.validateItemValues(itemValues);
   }
   public get selectedItems(): Array<ItemValue> { return this.selectedChoices; }
+  public get hasFilteredValue(): boolean { return !!this.valuePropertyName; }
+  public getFilteredValue(): any {
+    if(this.hasFilteredValue) return this.renderedValue;
+    return super.getFilteredValue();
+  }
   protected getMultipleSelectedItems(): Array<ItemValue> {
     return this.selectedChoices;
   }
@@ -232,13 +234,13 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
     }
 
     const val = this.renderedValue as Array<any>;
-    return val.map((item: any) => new ItemValue(item));
+    return val.map((item: any) => this.createItemValue(item));
   }
-
+  protected getAnswerCorrectIgnoreOrder(): boolean { return true; }
   protected onCheckForErrors(
     errors: Array<SurveyError>,
     isOnValueChanged: boolean
-  ) {
+  ):void {
     super.onCheckForErrors(errors, isOnValueChanged);
     if (isOnValueChanged) return;
 
@@ -525,7 +527,7 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
   protected convertValueToObject(val: any): any {
     if (!this.valuePropertyName) return val;
     let dest = undefined;
-    if (!!this.survey && this.survey.questionCountByValueName(this.getValueName()) > 1) {
+    if (!!this.survey && this.survey.questionsByValueName(this.getValueName()).length > 1) {
       dest = this.data.getValue(this.getValueName());
     }
     return Helpers.convertArrayValueToObject(val, this.valuePropertyName, dest);
@@ -575,6 +577,15 @@ export class QuestionCheckboxModel extends QuestionCheckboxBase {
   public get checkBoxSvgPath(): string {
     return "M5,13l2-2l3,3l7-7l2,2l-9,9L5,13z";
   }
+
+  //a11y
+  public get isNewA11yStructure(): boolean {
+    return true;
+  }
+  public get a11y_input_ariaRole(): string {
+    return "listbox";
+  }
+  // EO a11y
 }
 Serializer.addClass(
   "checkbox",

@@ -150,12 +150,10 @@ QUnit.test("Check errors location", function (assert) {
   });
   const q1 = survey.getQuestionByName("q1");
   const questionInMatrix = survey.getAllQuestions()[1].renderedTable.rows[0].cells[0].question;
-  assert.notOk(q1.isErrorsModeTooltip);
   assert.notOk(q1.showErrorsAboveQuestion);
   assert.notOk(q1.showErrorOnBottom);
   assert.ok(q1.showErrorOnTop);
 
-  assert.notOk(questionInMatrix.isErrorsModeTooltip);
   assert.notOk(questionInMatrix.showErrorsAboveQuestion);
   assert.notOk(questionInMatrix.showErrorOnBottom);
   assert.ok(questionInMatrix.showErrorOnTop);
@@ -171,15 +169,13 @@ QUnit.test("Check errors location", function (assert) {
   survey.questionErrorLocation = "top";
   assert.notOk(q1.showErrorOnTop);
   assert.notOk(q1.showErrorOnBottom);
-  assert.notOk(q1.isErrorsModeTooltip);
   assert.ok(q1.showErrorsAboveQuestion);
 
   assert.notOk(questionInMatrix.showErrorOnTop);
   assert.notOk(questionInMatrix.showErrorOnBottom);
   assert.ok(questionInMatrix.showErrorsAboveQuestion);
-  assert.notOk(questionInMatrix.isErrorsModeTooltip);
 });
-QUnit.test("Check isErrorsModeTooltip for questions in panel", function (assert) {
+QUnit.test("Check error location for questions in panel", function (assert) {
   StylesManager.applyTheme("default");
   const survey = new SurveyModel({
     elements: [
@@ -196,14 +192,12 @@ QUnit.test("Check isErrorsModeTooltip for questions in panel", function (assert)
     ]
   });
   const q1 = survey.getQuestionByName("q1");
-  assert.notOk(q1.isErrorsModeTooltip);
   assert.notOk(q1.showErrorOnBottom);
   assert.notOk(q1.showErrorsBelowQuestion);
   assert.notOk(q1.showErrorsAboveQuestion);
   assert.ok(q1.showErrorOnTop);
 
   survey.questionErrorLocation = "bottom";
-  assert.notOk(q1.isErrorsModeTooltip);
   assert.notOk(q1.showErrorOnTop);
   assert.notOk(q1.showErrorsBelowQuestion);
   assert.notOk(q1.showErrorsAboveQuestion);
@@ -211,14 +205,12 @@ QUnit.test("Check isErrorsModeTooltip for questions in panel", function (assert)
 
   survey.css = defaultV2Css;
   survey.questionErrorLocation = "top";
-  assert.notOk(q1.isErrorsModeTooltip);
   assert.notOk(q1.showErrorOnBottom);
   assert.notOk(q1.showErrorOnTop);
   assert.notOk(q1.showErrorsBelowQuestion);
   assert.ok(q1.showErrorsAboveQuestion);
 
   survey.questionErrorLocation = "bottom";
-  assert.notOk(q1.isErrorsModeTooltip);
   assert.notOk(q1.showErrorOnBottom);
   assert.notOk(q1.showErrorOnTop);
   assert.notOk(q1.showErrorsAboveQuestion);
@@ -244,6 +236,33 @@ QUnit.test("allowRootStyle", function (assert) {
   q1.allowRootStyle = false;
   survey.css = defaultV2Css;
   assert.deepEqual(q1.rootStyle, {});
+});
+QUnit.test("rootStyle on mobile", function (assert) {
+  StylesManager.applyTheme("default");
+  const survey = new SurveyModel({
+    elements: [{
+      type: "text",
+      name: "q1"
+    }]
+  });
+  const q1 = survey.getQuestionByName("q1");
+  assert.ok(q1.renderMinWidth);
+  assert.deepEqual(q1.rootStyle, {
+    "flexBasis": "100%",
+    "flexGrow": 1,
+    "flexShrink": 1,
+    "maxWidth": "100%",
+    "minWidth": "300px",
+  });
+  survey.setIsMobile(true);
+  assert.notOk(q1.renderMinWidth);
+  assert.deepEqual(q1.rootStyle, {
+    "flexBasis": "100%",
+    "flexGrow": 1,
+    "flexShrink": 1,
+    "maxWidth": "100%",
+    "minWidth": "min(100%, 300px)"
+  });
 });
 QUnit.test("question.errorLocation", function (assert) {
   const survey = new SurveyModel({
