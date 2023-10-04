@@ -10,7 +10,7 @@ import { QuestionTextBase } from "./question_textbase";
 import { ExpressionRunner } from "./conditions";
 import { SurveyModel } from "./survey";
 
-import IMask from "imask";
+import Inputmask from "inputmask";
 
 /**
  * A class that describes the Single-Line Input question type.
@@ -472,15 +472,10 @@ export class QuestionTextModel extends QuestionTextBase {
 
   @property() mask: string;
   private updateMaskInstance() {
-    if (!this.maskInstance) {
-      this.maskInstance = new IMask.InputMask(this.input, { mask: this.mask });
-    } else {
-      this.maskInstance.updateOptions({ mask: this.mask });
-    }
+    Inputmask(this.mask).mask(this.input);
   }
   private destroyMaskInstance() {
-    if (this.maskInstance) this.maskInstance.destroy();
-    this.maskInstance = null;
+    Inputmask.remove(this.input);
   }
   public afterRenderQuestionElement(el: HTMLElement) {
     if (!!el) {
