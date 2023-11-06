@@ -141,7 +141,7 @@ survey.onComplete.add((survey) => {
       const item = {
         name: key,
         value: question.value,
-        title: question.displayValue,
+        title: question.title,
         displayValue: question.displayValue
       };
       resultData.push(item);
