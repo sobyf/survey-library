@@ -688,7 +688,7 @@ export class QuestionMatrixDropdownRenderedTable extends Base {
           new Action({
             id: "remove-row",
             location: "end",
-            enabled: !this.matrix.isInputReadOnly,
+            enabled: !this.matrix.isInputReadOnly && !this.matrix.isInputDisabled,
             component: "sv-matrix-remove-button",
             data: { row: row, question: this.matrix },
           })
@@ -704,7 +704,7 @@ export class QuestionMatrixDropdownRenderedTable extends Base {
             location: "end",
             showTitle: false,
             title: matrix.removeRowText,
-            enabled: !matrix.isInputReadOnly,
+            enabled: !matrix.isInputReadOnly && !this.matrix.isInputDisabled,
             data: { row: row, question: matrix },
             action: () => {
               matrix.removeRowUI(row);

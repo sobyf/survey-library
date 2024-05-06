@@ -111,7 +111,7 @@ export class ButtonGroupItemModel {
     return this.question.isItemSelected(this.item);
   }
   public get readOnly() {
-    return this.question.isInputReadOnly || !this.item.isEnabled;
+    return !this.item.isEnabled;
   }
   public get name() {
     return this.question.name + "_" + this.question.id;

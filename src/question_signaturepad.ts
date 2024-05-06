@@ -143,12 +143,12 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
     this.resizeCanvas();
     var signaturePad = new SignaturePad(canvas, { backgroundColor: "#ffffff" });
     this.signaturePad = signaturePad;
-    if (this.isInputReadOnly) {
+    if (this.isInputReadOnly || this.isInputDisabled) {
       signaturePad.off();
     }
 
     this.readOnlyChangedCallback = () => {
-      if (this.isInputReadOnly) {
+      if (this.isInputReadOnly || this.isInputDisabled) {
         signaturePad.off();
       } else {
         signaturePad.on();
@@ -281,7 +281,7 @@ export class QuestionSignaturePadModel extends QuestionFileModelBase {
   public get canShowClearButton(): boolean {
     const hasSignature = !this.nothingIsDrawn();
     const isUploading = this.isUploading;
-    return !this.isInputReadOnly && this.allowClear && hasSignature && !isUploading;
+    return !this.isInputReadOnly && !this.isInputDisabled && this.allowClear && hasSignature && !isUploading;
   }
   /**
    * Specifies a color for the pen.

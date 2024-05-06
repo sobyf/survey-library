@@ -1355,6 +1355,9 @@ export class Question extends SurveyElement<Question>
     return this.isReadOnly;
   }
   public get isInputDisabled(): boolean {
+    if (this.forceIsInputReadOnly !== undefined) {
+      return this.forceIsInputReadOnly;
+    }
     return this.isDesignModeV2;
   }
   public get renderedInputReadOnly() {

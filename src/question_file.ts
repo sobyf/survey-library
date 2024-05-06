@@ -267,7 +267,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       id: "sv-file-choose-file",
       iconSize: "auto",
       data: { question: this },
-      enabledIf: () => !this.isInputReadOnly,
+      enabledIf: () => !this.isInputReadOnly && !this.isInputDisabled,
       component: "sv-file-choose-btn"
     });
     this.startCameraAction = new Action({
@@ -276,7 +276,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       iconSize: "auto",
       locTitle: this.locTakePhotoCaption,
       showTitle: <boolean>(new ComputedUpdater<boolean>(() => !this.isAnswered) as any),
-      enabledIf: () => !this.isInputReadOnly,
+      enabledIf: () => !this.isInputReadOnly && !this.isInputDisabled,
       action: () => {
         this.startVideo();
       }
@@ -287,7 +287,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       iconSize: "auto",
       locTitle: this.locClearButtonCaption,
       showTitle: false,
-      enabledIf: () => !this.isInputReadOnly,
+      enabledIf: () => !this.isInputReadOnly && !this.isInputDisabled,
       innerCss: <string>(new ComputedUpdater<string>(() => this.cssClasses.removeButton) as any),
       action: () => {
         this.doClean();
@@ -874,7 +874,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
       .append(this.cssClasses.chooseFile)
       .append(this.cssClasses.controlDisabled, this.isReadOnly)
       .append(this.cssClasses.chooseFileAsText, !isAnswered)
-      .append(this.cssClasses.chooseFileAsTextDisabled, !isAnswered && this.isInputReadOnly)
+      .append(this.cssClasses.chooseFileAsTextDisabled, !isAnswered && (this.isInputReadOnly || this.isInputDisabled))
       .append(this.cssClasses.contextButton, isAnswered)
       .append(this.cssClasses.chooseFileAsIcon, isAnswered)
       .toString();
@@ -996,7 +996,7 @@ export class QuestionFileModel extends QuestionFileModelBase {
   //#region
   // web-based methods
   private rootElement: HTMLElement;
-  private canDragDrop(): boolean { return !this.isInputReadOnly && this.currentMode !== "camera" && !this.isPlayingVideo; }
+  private canDragDrop(): boolean { return !this.isInputReadOnly && !this.isInputDisabled && this.currentMode !== "camera" && !this.isPlayingVideo; }
   afterRender(el: HTMLElement): void {
     this.rootElement = el;
     super.afterRender(el);

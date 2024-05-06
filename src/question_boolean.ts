@@ -270,7 +270,7 @@ export class QuestionBooleanModel extends Question {
   }
 
   public get allowClick(): boolean {
-    return this.isIndeterminate && !this.isInputReadOnly;
+    return this.isIndeterminate && !this.isInputReadOnly && !this.isInputDisabled;
   }
 
   public getCheckedLabel(): LocalizableString {

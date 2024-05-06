@@ -376,7 +376,7 @@ export class DropdownListModel extends Base {
     return this._popupModel;
   }
   public get noTabIndex(): boolean {
-    return this.question.isInputReadOnly || this.searchEnabled;
+    return this.question.isInputDisabled || this.searchEnabled;
   }
   public get filterReadOnly(): boolean {
     return this.question.isInputReadOnly || !this.searchEnabled || !this.focused;

@@ -60,14 +60,14 @@ export class MatrixRowModel extends Base {
     return this.getPropertyValue("value");
   }
   public set value(val: any) {
-    if(!this.isReadOnly) {
+    if(!this.isDisabled) {
       this.setValueDirectly(this.data.getCorrectedRowValue(val));
     }
   }
   public setValueDirectly(val: any): void {
     this.setPropertyValue("value", val);
   }
-  public get isReadOnly(): boolean { return !this.item.enabled || this.data.isInputReadOnly; }
+  public get isDisabled(): boolean { return !this.item.enabled; }
   public get rowTextClasses(): string {
     return new CssClassBuilder().append(this.data.cssClasses.rowTextCell).toString();
   }
@@ -81,7 +81,7 @@ export class MatrixRowModel extends Base {
     const cssClasses = (<any>this.data).cssClasses;
     return new CssClassBuilder().append(cssClasses.row)
       .append(cssClasses.rowError, this.hasError)
-      .append(cssClasses.rowReadOnly, this.isReadOnly)
+      .append(cssClasses.rowReadOnly, this.isDisabled)
       .append(cssClasses.rowDisabled, this.data.isDisabledStyle)
       .toString();
   }
