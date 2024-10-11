@@ -16,6 +16,10 @@ import { settings } from "./settings";
 import { getRenderedSize } from "./utils/utils";
 import { DomDocumentHelper, DomWindowHelper } from "./global_variables_utils";
 import { AnimationTab, IAnimationConsumer } from "./utils/animation";
+import { SvgRegistry } from "./svgbundle";
+
+import chooseFileIcon from "./icons/ChooseFile.svg";
+SvgRegistry.registerIconFromSvg("icon-choosefile", chooseFileIcon);
 
 export function dataUrl2File(dataUrl: string, fileName: string, type: string) {
   const str = atob(dataUrl.split(",")[1]);
